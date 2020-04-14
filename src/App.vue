@@ -1,32 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" class="app">
+    <aside class="app__aside">
+      <aisde-menu />
+    </aside>
+
+    <main class="app__main">
+      <router-view />
+    </main>
   </div>
 </template>
 
+<script>
+import AisdeMenu from '@/components/common/AisdeMenu/AisdeMenu.vue';
+
+
+export default {
+  name: 'app',
+  components: {
+    AisdeMenu,
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100%;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  &__aside {
+    width: $aside-width;
+    background-color: $color-grey-1;
+  }
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  &__main {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    background-color: $color-white;
+    box-shadow: 0 0 20px rgba($color-black, 0.1);
   }
 }
 </style>
