@@ -1,0 +1,24 @@
+
+/* stylelint-disable-next-line */
+*, :after, :before, html {
+  box-sizing: border-box;
+}
+
+/* stylelint-disable-next-line */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* stylelint-disable-next-line */
+body {
+  font-size: 14px;
+  line-height: 141.62%;
+  color: $color-font-main;
+  letter-spacing: normal;
+}
+
+/* stylelint-disable-next-line */
+body, button, input, select, textarea {
+  font-family: $main-font-family;
+}

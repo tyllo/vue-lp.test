@@ -1,0 +1,9 @@
+@import "mixin";
+
+@font-face {
+  @include font-urls(Medium Italic);
+
+  font-family: 'TT Norms Medium';
+  font-style: italic;
+  font-weight: 500;
+}

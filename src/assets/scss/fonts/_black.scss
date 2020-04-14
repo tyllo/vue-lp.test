@@ -1,0 +1,9 @@
+@import "mixin";
+
+@font-face {
+  @include font-urls(Black);
+
+  font-family: 'TT Norms';
+  font-style: normal;
+  font-weight: 900;
+}
