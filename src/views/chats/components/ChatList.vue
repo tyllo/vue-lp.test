@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import * as ROUTES from '@/helpers/enums/routes';
+
 import ChatsItem from './ChatsItem.vue';
 
 
@@ -32,6 +34,8 @@ export default {
   methods: {
     getRouteToMesages(data) {
       return {
+        name: ROUTES.CHAT_MESSAGES.LAYOUT,
+        params: { chat_id: data.id },
       };
     },
   },

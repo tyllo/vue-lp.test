@@ -1,0 +1,134 @@
+<template>
+  <div class="view-chat-messages-list">
+    <spinner
+      v-if="isLoadingChatMessages"
+      color="blue"
+      class="view-chat-messages-list__spinner"
+    />
+
+    <div class="view-chat-messages-list__list-container app-custom-scroll">
+      <chat-messages-list
+        v-if="!isLoadingChatMessages"
+        :profile="profile"
+        :list="messageList"
+        class="view-chat-messages-list__list"
+      />
+    </div>
+
+    <div class="view-chat-messages-list__form">
+      <chat-messages-input-form
+        :loading="isLoadingChatMessageForm"
+        @submit="onSubmit"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex';
+import { ChatMessagesStoreModule } from './store';
+
+import Spinner from '@/components/common/Spinner.vue';
+import ChatMessagesList from './components/ChatMessagesList.vue';
+import ChatMessagesInputForm from './components/ChatMessagesInputForm.vue';
+
+
+export default {
+  name: 'view-chat-mesages-list',
+  components: {
+    Spinner,
+    ChatMessagesList,
+    ChatMessagesInputForm,
+  },
+  props: {
+    chat_id: {
+      type: Number,
+      required: true,
+    },
+  },
+  data: () => ({
+    isLoadingChatMessages: true,
+    isLoadingChatMessageForm: true,
+  }),
+  computed: {
+    ...mapGetters(['profile']),
+    ...ChatMessagesStoreModule.mapState({
+      messageList: 'list',
+    }),
+  },
+  created() {
+    this.onGetAllMessages();
+  },
+  beforeRouteUpdate(to, from, next) {
+    next();
+    this.onGetAllMessages();
+  },
+  methods: {
+    ...ChatMessagesStoreModule.mapActions({
+      getAllMessages: 'getAll',
+      createMessage: 'create',
+    }),
+
+    async onGetAllMessages() {
+      this.isLoadingChatMessages = true;
+
+      try {
+        const params = { chat_id: this.chat_id };
+        await this.getAllMessages(params);
+      } catch (e) {
+        // TODO: message with error
+      }
+
+      this.isLoadingChatMessages = false;
+    },
+
+    async onSubmit(form) {
+      this.isLoadingChatMessageForm = true;
+
+      try {
+        const params = { ...form, chat_id: this.chat_id };
+        await this.createMessage(params);
+      } catch (e) {
+        // TODO: message with error
+      }
+
+      this.isLoadingChatMessageForm = false;
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+
+.view-chat-messages-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+
+  &__list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - #{$chat-message-form-height});
+    padding: 16px 16px 43px 39px;
+    overflow-y: auto;
+  }
+
+  &__list {
+    margin-top: auto;
+  }
+
+  &__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__form {
+    border-top: 1px solid $color-grey-2;
+  }
+}
+</style>

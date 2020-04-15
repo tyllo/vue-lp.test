@@ -63,3 +63,9 @@ export const getProfileStub = () => ({
 export const getChatsStabs = () => stabs
   .map((_) => ({ ..._, parts: void 0, last_part: last(_.parts) }));
 
+export const getChatsPartStabs = (id) => {
+  const result = stabs.find((_) => _.id === id);
+  return result ? result.parts : null;
+};
+
+export const getChatUnreadMessagesStabs = () => 151;
