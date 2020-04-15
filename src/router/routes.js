@@ -1,3 +1,4 @@
+import empty from '@/views/empty/routes';
 /**
  *
  * @param {{ store: import('vuex').Store, router: import('vue-router').default } options
@@ -20,4 +21,5 @@ const createGetRoutes = (options, list) => {
  * @returns Array<import('vue-router').RouteConfig>
  */
 export const createRoutes = (options) => createGetRoutes(options, [
+  empty,
 ]).filter(Boolean).flat();
