@@ -62,10 +62,3 @@ export default {
   }
 }
 </style>
-
-// for transition
-<style lang="scss">
-  .messages {
-
-  }
-</style>
