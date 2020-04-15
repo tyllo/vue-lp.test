@@ -5,13 +5,14 @@
   >
     <div
       :class="{ 'chat-messages-input-form__textarea-container--disabled': loading }"
-      class="chat-messages-input-form__textarea-container"
+      class="chat-messages-input-form__textarea-container app-custom-scroll"
     >
-      <textarea
+      <custom-textarea
         v-model="form.text"
         :rows="1"
         :disabled="loading"
         placeholder="Введите текст..."
+        autoresize
         class="chat-messages-input-form__textarea"
         @keypress.ctrl="onSubmit"
       />
@@ -37,7 +38,7 @@
 
 <script>
 import Spinner from '@/components/common/Spinner.vue';
-
+import CustomTextarea from '@/components/forms/CustomTextarea.vue';
 
 const createDefaultData = () => ({
   created: void 0,
@@ -50,6 +51,7 @@ export default {
   name: 'chat-messages-input-form',
   components: {
     Spinner,
+    CustomTextarea,
   },
   props: {
     loading: Boolean,
@@ -73,15 +75,21 @@ export default {
 <style lang="scss">
 
 .chat-messages-input-form {
+  position: relative;
   display: flex;
+  min-height: $chat-message-form-height;
 
   &__textarea-container {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     width: 100%;
+    max-height: 300px;
+    padding-right: $chat-message-form-height;
+    overflow-y: auto;
 
     &--disabled {
+      pointer-events: none;
       cursor: default;
       background-color: $color-grey-1;
     }
@@ -91,22 +99,12 @@ export default {
     width: 100%;
     padding: 20px;
     padding-left: 33px;
-    margin: 0;
-    font-size: 14px;
-    line-height: 20px;
-    color: $color-grey-10;
-    resize: none;
-    background-color: $transparent;
-    border: none;
-    outline: none;
-
-    &[disabled] {
-      background-color: $color-grey-1;
-    }
   }
 
   &__button {
-    position: relative;
+    position: absolute;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-shrink: 0;
     align-items: center;
@@ -114,6 +112,7 @@ export default {
     width: $chat-message-form-height;
     height: $chat-message-form-height;
     padding: 0;
+    margin-top: auto;
     cursor: pointer;
     background-color: $color-blue-2;
     border: none;
