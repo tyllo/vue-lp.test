@@ -1,23 +1,26 @@
 <template>
   <div id="app" class="app">
     <aside class="app__aside">
-      <aisde-menu />
+      <router-view name="aside" />
     </aside>
 
     <main class="app__main">
-      <router-view />
+      <router-view name="main" />
     </main>
   </div>
 </template>
 
 <script>
-import AisdeMenu from '@/components/common/AisdeMenu/AisdeMenu.vue';
+import { mapActions } from 'vuex';
 
 
 export default {
   name: 'app',
-  components: {
-    AisdeMenu,
+  created() {
+    this.getProfile();
+  },
+  methods: {
+    ...mapActions(['getProfile']),
   },
 };
 </script>
@@ -35,9 +38,11 @@ export default {
   }
 
   &__main {
+    z-index: 10;
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
+    max-width: calc(100% - #{$aside-width});
     background-color: $color-white;
     box-shadow: 0 0 20px rgba($color-black, 0.1);
   }
