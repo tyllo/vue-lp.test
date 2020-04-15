@@ -1,6 +1,8 @@
 
 $color-white: #fff;
 $color-black: #000;
+$currentColor: currentColor;
+$transparent: transparent;
 
 $color-grey-10: #7d8790;
 $color-grey-9: #35383d;
@@ -17,4 +19,8 @@ $color-font-main: #475453;
 $main-font-family: "TT Norms", "Arial", sans-serif;
 
 $aside-width: 300px;
-$aside-bg-color: #e9f5f4;
+
+$chat-message-bg-color: #f6f7f9;
+$chat-message-self-bg-color: #e9f5f4;
+
+$chat-message-form-height: 80px;

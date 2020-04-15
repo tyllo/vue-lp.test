@@ -22,3 +22,29 @@ body {
 body, button, input, select, textarea {
   font-family: $main-font-family;
 }
+
+.app-custom-scroll {
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 10px;
+    background-color: $transparent;
+    -webkit-border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar:hover {
+    background-color: $color-grey-1;
+  }
+
+  &::-webkit-scrollbar-thumb:vertical {
+    min-height: 10px;
+    background-color: $color-grey-2;
+    background-clip: padding-box;
+    border: 2px solid rgba($color-black, 0);
+    -webkit-border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb:vertical:active {
+    background: $color-grey-2;
+    -webkit-border-radius: 100px;
+  }
+}

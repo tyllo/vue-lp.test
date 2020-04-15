@@ -1,6 +1,9 @@
 import chats from '@/views/chats/routes';
 import chatMessages from '@/views/chat-messages/routes';
 import empty from '@/views/empty/routes';
+import errors from '@/views/errors/routes';
+
+
 /**
  *
  * @param {{ store: import('vuex').Store, router: import('vue-router').default } options
@@ -26,4 +29,7 @@ export const createRoutes = (options) => createGetRoutes(options, [
   empty,
   chats,
   chatMessages,
+
+  // must be last, because in empty - `*` route
+  errors,
 ]).filter(Boolean).flat();
