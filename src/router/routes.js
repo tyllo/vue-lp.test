@@ -1,3 +1,4 @@
+import chats from '@/views/chats/routes';
 import empty from '@/views/empty/routes';
 /**
  *
@@ -22,4 +23,5 @@ const createGetRoutes = (options, list) => {
  */
 export const createRoutes = (options) => createGetRoutes(options, [
   empty,
+  chats,
 ]).filter(Boolean).flat();
