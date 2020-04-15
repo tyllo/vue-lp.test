@@ -59,12 +59,17 @@ export default {
       messageList: 'list',
     }),
   },
+  watch: {
+    messageList: {
+      // immediate: true,
+      handler: 'scrollToBottom',
+    },
+  },
   created() {
     this.onGetAllMessages();
   },
   updated() {
-    const { list } = this.$refs;
-    list.scrollTop = list.scrollHeight;
+    this.scrollToBottom();
   },
   beforeRouteUpdate(to, from, next) {
     next();
@@ -74,7 +79,7 @@ export default {
   methods: {
     ...ChatMessagesStoreModule.mapActions({
       getAllMessages: 'getAll',
-      createMessage: 'create',
+      addMessage: 'addMessage',
     }),
 
     async onGetAllMessages() {
@@ -95,13 +100,18 @@ export default {
 
       try {
         const params = { ...form, chat_id: this.chat_id };
-        await this.createMessage(params);
+        await this.addMessage(params);
         this.$refs.form.onReset();
       } catch (e) {
         // TODO: message with error
       }
 
       this.isLoadingChatMessageForm = false;
+    },
+
+    scrollToBottom() {
+      const { list } = this.$refs;
+      list.scrollTop = list.scrollHeight;
     },
   },
 };

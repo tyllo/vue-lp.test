@@ -18,7 +18,7 @@ class ChatsCrudAdapter extends CrudAdapter {
     return request;
   }
 
-  create(params) {
+  addMessage(params) {
     let request = this.api.create(params);
 
     if (process.env.VUE_APP_STABS === 'true') {
@@ -39,8 +39,8 @@ crudModule.actions = {
   ...crudModule.actions,
 
   // eslint-disable-next-line no-shadow
-  async create({ commit, state }, params) {
-    const response = await adapter.create(params);
+  async addMessage({ commit, state }, params) {
+    const response = await adapter.addMessage(params);
     commit(TYPES.SET_LIST, response);
     return state.list;
   },

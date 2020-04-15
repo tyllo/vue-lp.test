@@ -13,6 +13,7 @@
         :disabled="loading"
         placeholder="Введите текст..."
         class="chat-messages-input-form__textarea"
+        @keypress.ctrl="onSubmit"
       />
     </div>
 
