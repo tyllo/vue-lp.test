@@ -1,0 +1,13 @@
+
+.transition-fade-down {
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.5s;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}

@@ -6,13 +6,15 @@
       class="view-chat-messages-list__spinner"
     />
 
-    <div class="view-chat-messages-list__list-container app-custom-scroll">
-      <chat-messages-list
-        v-if="!isLoadingChatMessages"
-        :profile="profile"
-        :list="messageList"
-        class="view-chat-messages-list__list"
-      />
+    <div ref="list" class="view-chat-messages-list__list-container app-custom-scroll">
+      <transition name="transition-fade" appear>
+        <chat-messages-list
+          v-if="!isLoadingChatMessages"
+          :profile="profile"
+          :list="messageList"
+          class="view-chat-messages-list__list"
+        />
+      </transition>
     </div>
 
     <div class="view-chat-messages-list__form">
@@ -97,6 +99,8 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="@/assets/scss/transitions/fade.scss"></style>
 
 <style lang="scss">
 

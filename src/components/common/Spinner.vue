@@ -1,9 +1,11 @@
 <template>
-  <div class="spinner" :class="classObject">
-    <div class="spinner__bounce spinner__bounce--1" />
-    <div class="spinner__bounce spinner__bounce--2" />
-    <div class="spinner__bounce spinner__bounce--3" />
-  </div>
+  <transition name="transition-fade" appear>
+    <div class="spinner" :class="classObject">
+      <div class="spinner__bounce spinner__bounce--1" />
+      <div class="spinner__bounce spinner__bounce--2" />
+      <div class="spinner__bounce spinner__bounce--3" />
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -32,6 +34,8 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="@/assets/scss/transitions/fade.scss"></style>
 
 <style lang="scss">
 

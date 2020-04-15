@@ -8,11 +8,14 @@
         v-text="'Сообщения'"
       />
 
-      <span
-        v-if="countUnreadMessages"
-        class="view-chats-list__title-counter"
-        v-text="countUnreadMessages"
-      />
+      <transition name="transition-fade" appear>
+        <span
+          v-if="countUnreadMessages"
+          :key="countUnreadMessages"
+          class="view-chats-list__title-counter"
+          v-text="countUnreadMessages"
+        />
+      </transition>
     </div>
 
     <spinner
@@ -22,10 +25,12 @@
     />
 
     <div class="view-chats-list__list app-custom-scroll">
-      <aisde-menu-chat-list
-        v-if="chatList"
-        :list="chatList"
-      />
+      <transition name="transition-fade" appear>
+        <aisde-menu-chat-list
+          v-if="chatList"
+          :list="chatList"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -76,6 +81,8 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="@/assets/scss/transitions/fade.scss"></style>
 
 <style lang="scss">
 

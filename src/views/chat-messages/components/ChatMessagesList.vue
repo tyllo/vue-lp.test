@@ -1,7 +1,7 @@
 <template>
   <transition-group
     tag="div"
-    name="chat-messages-list--transition"
+    name="transition-fade-down"
     class="chat-messages-list"
   >
     <template v-for="item in list">
@@ -40,24 +40,13 @@ export default {
 };
 </script>
 
+<style lang="scss" src="@/assets/scss/transitions/fade-down.scss"></style>
+
 <style lang="scss">
 
 .chat-messages-list {
   display: flex;
   flex-direction: column;
-
-  &--transition {
-    &-enter-active,
-    &-leave-active {
-      transition: all 0.5s;
-    }
-
-    &-enter,
-    &-leave-to {
-      opacity: 0;
-      transform: translateY(-50%);
-    }
-  }
 
   &__item {
     width: 380px;
