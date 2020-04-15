@@ -15,6 +15,14 @@ module.exports = {
       },
     },
   },
+  pluginOptions: {
+    moment: {
+      locales: [
+        'ru',
+        // 'en',
+      ],
+    },
+  },
   devServer: {
     overlay: {
       warnings: true,

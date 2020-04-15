@@ -42,6 +42,7 @@
     "stylelint-declaration-use-variable": "^1.7.2",
     "stylelint-scss": "^3.17.0",
     "url-pattern": "^1.0.3",
+    "vue-cli-plugin-moment": "^0.1.1",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHooks": {
