@@ -1,4 +1,6 @@
+import moment from 'moment';
 import last from 'lodash/last';
+
 
 const AUTHOR = 'vasiliy';
 
@@ -63,7 +65,21 @@ export const getProfileStub = () => ({
 export const getChatsStabs = () => stabs
   .map((_) => ({ ..._, parts: void 0, last_part: last(_.parts) }));
 
-export const getChatsPartStabs = (id) => {
+export const createChatMessagesStabs = (data) => {
+  const chat = stabs.find((_) => _.id === data.chat_id);
+
+  const params = {
+    ...data,
+    id: last(chat.parts).id + 1,
+    author: AUTHOR,
+    created: moment().format('YYYY-MM-DD HH:mm'),
+  };
+
+  chat.parts.push(params);
+  return chat.parts;
+};
+
+export const getChatMessagesStabs = (id) => {
   const result = stabs.find((_) => _.id === id);
   return result ? result.parts : null;
 };

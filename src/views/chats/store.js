@@ -2,7 +2,7 @@ import { createNamespacedHelpers } from 'vuex';
 import { ChatsApi, ChatMessagesApi } from '@/api';
 import { CrudAdapter, createCrudModule } from '@/store/create-crud-module';
 import { getTimeout } from '@/helpers/getTimeout';
-import { getChatsStabs, getChatUnreadMessagesStabs } from '@/stabs';
+import * as stabs from '@/stabs';
 
 
 class ChatsCrudAdapter extends CrudAdapter {
@@ -12,7 +12,7 @@ class ChatsCrudAdapter extends CrudAdapter {
     if (process.env.VUE_APP_STABS === 'true') {
       request = request
         .catch(getTimeout.bind(null, void 0))
-        .then(getChatsStabs);
+        .then(stabs.getChatsStabs);
     }
 
     return request;
@@ -27,7 +27,7 @@ class ChatsCrudAdapter extends CrudAdapter {
     if (process.env.VUE_APP_STABS === 'true') {
       request = request
         .catch(getTimeout.bind(null, 1000))
-        .then(getChatUnreadMessagesStabs);
+        .then(stabs.getChatUnreadMessagesStabs);
     }
 
     return request;

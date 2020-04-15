@@ -19,6 +19,7 @@
 
     <div class="view-chat-messages-list__form">
       <chat-messages-input-form
+        ref="form"
         :loading="isLoadingChatMessageForm"
         @submit="onSubmit"
       />
@@ -50,7 +51,7 @@ export default {
   },
   data: () => ({
     isLoadingChatMessages: true,
-    isLoadingChatMessageForm: true,
+    isLoadingChatMessageForm: false,
   }),
   computed: {
     ...mapGetters(['profile']),
@@ -61,9 +62,14 @@ export default {
   created() {
     this.onGetAllMessages();
   },
+  updated() {
+    const { list } = this.$refs;
+    list.scrollTop = list.scrollHeight;
+  },
   beforeRouteUpdate(to, from, next) {
     next();
-    this.onGetAllMessages();
+    this.$refs.form.onReset();
+    this.$nextTick(this.onGetAllMessages);
   },
   methods: {
     ...ChatMessagesStoreModule.mapActions({
@@ -90,6 +96,7 @@ export default {
       try {
         const params = { ...form, chat_id: this.chat_id };
         await this.createMessage(params);
+        this.$refs.form.onReset();
       } catch (e) {
         // TODO: message with error
       }
