@@ -55,7 +55,27 @@ const stabs = [
       },
     ],
   },
+  {
+    id: 3,
+    subject: 'Привет!',
+    created: '2016-03-12 14:19',
+    parts: [
+      {
+        id: 1,
+        author: AUTHOR,
+        created: '2019-09-02 15:20',
+        text: 'Morbi hac eligendi totam? Elementum mi facilis aliquet id turpis ultrices mollitia porttitor praesentium animi ullamco eleifend scelerisque, sapien quam explicabo conubia egestas vehicula!',
+      },
+    ],
+  },
 ];
+
+const length = Math.ceil(Math.random() * 20);
+
+Array.from({ length }).forEach((_, i) => {
+  const data = { ...stabs[2], id: stabs[2].id + i + 1 };
+  stabs.push(data);
+});
 
 export const getProfileStub = () => ({
   id: AUTHOR,
